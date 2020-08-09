@@ -1,0 +1,7 @@
+{
+    "name": "url-shortener",
+    "description": "Website for short URL generating.",
+    "require": {
+        "doctrine/orm": "^2.7"
+    }
+}
