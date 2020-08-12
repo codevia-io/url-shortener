@@ -4,6 +4,7 @@
     "license": "MIT",
     "require": {
         "doctrine/orm": "^2.7",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "nikic/fast-route": "^1.3"
     }
 }
