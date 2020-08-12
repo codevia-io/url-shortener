@@ -1,7 +1,9 @@
 {
-    "name": "url-shortener",
+    "name": "pi-qo/url-shortener",
     "description": "Website for short URL generating.",
+    "license": "MIT",
     "require": {
-        "doctrine/orm": "^2.7"
+        "doctrine/orm": "^2.7",
+        "twig/twig": "^3.0"
     }
 }
