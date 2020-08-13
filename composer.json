@@ -10,7 +10,6 @@
     "autoload": {
         "psr-4": {
             "Page\\": "src/Page/",
-            "Storage\\": "src/Storage/",
             "App\\": "src/"
         }
     }
