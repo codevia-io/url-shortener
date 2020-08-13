@@ -2,5 +2,47 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-  <h1>Home</h1>
+  <div class="hero-container">
+    <img class="hero-container-img" src="/assets/images/home-background.svg" alt="">
+    <div class="container text-white py-5">
+      <div class="row align-items-center">
+        <div class="col-md">
+          <h1 class="font-weight-bold">
+            Shorten your URLs, easily.
+          </h1>
+          <p class="lead mb-4">
+            You want to beautify your emails with short URLs rather than long ugly ones?
+            Well, you've found the right place.
+          </p>
+          <button class="btn btn-light shadow rounded-pill">
+            Learn more
+          </button>
+        </div>
+        <div class="col-md">
+          <div class="card mb-2 bg-light text-dark shadow rounded-lg">
+            <div class="card-body">
+              <div class="form-group">
+                <label class="font-weight-bold">Your long URL:</label>
+                <div class="form-row">
+                  <div class="col"> 
+                    <input class="form-control rounded-pill" placeholder="Enter URL here">
+                  </div>
+                  <div class="col-auto">
+                    <button class="btn btn-primary rounded-pill" type="submit">Reduce!</button>
+                  </div>
+                </div>
+              </div>
+              <label class="font-weight-bold">Shortened URL:</label>
+              <div class="text-muted">
+                We are waiting you to paste your long URL...
+              </div>
+            </div>
+          </div>
+          <small class="text-muted">
+            We do not collect any data, except the URL you provide.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
