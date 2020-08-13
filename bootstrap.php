@@ -37,8 +37,3 @@ $conn = [
 
 // Obtention du gestionnaire d'entités
 $entityManager = EntityManager::create($conn, $doctrinConfig);
-
-$loader = new \Twig\Loader\FilesystemLoader('templates');
-$twig = new \Twig\Environment($loader, [
-    'cache' => null
-]);
