@@ -20,7 +20,7 @@ class Link
     /**
      * @ORM\Column(type="string")
      */
-    protected $origin;
+    protected $destination;
 
     /**
      * @ORM\Column(type="datetime")
@@ -37,14 +37,14 @@ class Link
         return $this->id;
     }
 
-    public function getOrigin()
+    public function getDestination()
     {
-        return $this->origin;
+        return $this->destination;
     }
 
-    public function setOrigin($origin)
+    public function setDestination($destination)
     {
-        $this->origin = $origin;
+        $this->destination = $destination;
     }
 
     public function getDate()
@@ -52,7 +52,7 @@ class Link
         return $this->date;
     }
 
-    public function setDate(datetime $date)
+    public function setDate(\DateTime $date)
     {
         $this->date = $date;
     }
