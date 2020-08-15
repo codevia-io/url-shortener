@@ -2,8 +2,14 @@
 
 require_once __DIR__ . '/bootstrap.php';
 
+// Allow to post JSON data to PHP server
+if (sizeof($_POST) === 0) {
+    $_POST = json_decode(file_get_contents('php://input'), true);
+}
+
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->get('/', '\\Page\\Home');
+    $r->post('/api/url', '\\API\\URL');
 });
 
 // Fetch method and URI from somewhere
@@ -29,6 +35,6 @@ switch ($routeInfo[0]) {
         $class = $routeInfo[1];
         $vars = $routeInfo[2];
         $instance = new $class();
-        $instance->{$_SERVER['REQUEST_METHOD']}($vars);
+        $instance->{$_SERVER['REQUEST_METHOD']}($entityManager, $vars);
         break;
 }
