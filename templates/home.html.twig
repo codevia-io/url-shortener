@@ -4,10 +4,11 @@
 {% block body %}
   <div class="hero-container">
     <img class="hero-container-img" src="/assets/images/home-background.svg" alt="">
-    <div class="container text-white py-5">
-      <div class="row align-items-center">
-        <div class="col-md">
-          <h1 class="font-weight-bold">
+    <div class="container text-white" style="min-height: calc(80vh - 3.5rem)">
+      <div class="row align-items-center py-5" style="min-height: 75%">
+        <div class="col-md mb-3 mb-md-0" style="text-shadow: var(--dark) 1px 1px 2px;">
+          <h1 class="font-weight-bold mb-3">
+            <i class="fad fa-keyboard"></i>
             Shorten your URLs, easily.
           </h1>
           <p class="lead mb-4">
@@ -19,30 +20,106 @@
           </button>
         </div>
         <div class="col-md">
-          <div class="card mb-2 bg-light text-dark shadow rounded-lg">
-            <div class="card-body">
-              <div class="form-group">
-                <label class="font-weight-bold">Your long URL:</label>
-                <div class="form-row">
-                  <div class="col"> 
-                    <input class="form-control rounded-pill" placeholder="Enter URL here">
+          {% verbatim %}
+            <div id="app" class="card mb-2 bg-light text-dark shadow rounded-lg">
+              <div class="card-body p-2 p-md-3">
+                <form class="mb-0" @submit.prevent="onSubmit">
+                  <div class="form-group">
+                    <label class="font-weight-bold">
+                      <i class="fad fa-link"></i>
+                      Your long URL:  
+                    </label>
+                    <div class="input-group">
+                      <input
+                        v-model="longURL"
+                        class="form-control"
+                        placeholder="Enter URL here"
+                        @input="showError = false"
+                      >
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Reduce!</button>
+                      </div>
+                    </div>
+                    <small v-if="showError" class="form-text text-danger">
+                      Please enter a valid URL.
+                    </small>
                   </div>
-                  <div class="col-auto">
-                    <button class="btn btn-primary rounded-pill" type="submit">Reduce!</button>
+                  <label class="font-weight-bold">
+                    <i class="fad fa-star"></i>
+                    Shortened URL:
+                  </label>
+                  <div class="text-muted">
+                    <template v-if="shortURL">
+                      <a :href="shortURL" target="_blank">
+                        {{ shortURL }}
+                      </a>
+                    </template>
+                    <template v-else>
+                      We are waiting for you to paste your long URL...
+                    </template>
                   </div>
-                </div>
-              </div>
-              <label class="font-weight-bold">Shortened URL:</label>
-              <div class="text-muted">
-                We are waiting you to paste your long URL...
+                </form>
               </div>
             </div>
-          </div>
-          <small class="text-muted">
-            We do not collect any data, except the URL you provide.
-          </small>
+            <small class="text-muted" style="text-shadow: var(--light) 1px 1px 2px;">
+              We do not collect any data, except the URL you provide.
+            </small>
+          {% endverbatim %}
         </div>
       </div>
     </div>
   </div>
+  <div class="container">
+    <h2 class="font-weight-bold">
+      How does it works?
+      <small class="text-muted">
+        Well, it's simple.
+      </small>
+    </h2>
+  </div>
+{% endblock %}
+
+{% block script %}
+  {{ parent() }}
+  {# <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script> #}
+  <script src="https://fr.vuejs.org/js/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data () {
+        return {
+          longURL: '',
+          shortURL: '',
+          showError: false
+        }
+      },
+      computed: {
+        isValid () {
+          return this.validateURL(this.longURL)
+        }
+      },
+      methods: {
+        validateURL (value) {
+          return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value)
+        },
+        onSubmit () {
+          if (this.isValid) {
+            fetch('/api/url', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ url: this.longURL })
+            }).then(response => response.json()).then(data => {
+              this.shortURL = `https://l.pi-qo.com/${data.url}`
+            }).catch(() => {
+              this.showError = true
+            })
+          } else {
+            this.showError = true
+          }
+        }
+      }
+    })
+  </script>
 {% endblock %}
