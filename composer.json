@@ -10,7 +10,9 @@
     "autoload": {
         "psr-4": {
             "Page\\": "src/Page/",
-            "App\\": "src/"
+            "API\\": "src/API/",
+            "App\\": "src/",
+            "Entity\\": "entities/"
         }
     }
 }
