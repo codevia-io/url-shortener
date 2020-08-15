@@ -6,6 +6,19 @@ use \Entity\Link;
 
 class URL
 {
+    public function GET($em, $vars)
+    {
+        $link = $em->find('Entity\\Link', base_convert($vars['id'], 36, 10));
+
+        if ($link !== null) {
+            header('Location: ' . $link->getDestination());
+            exit;
+        }
+
+        // TODO: Add default 404 page
+    }
+
+
     public function POST($em)
     {
         if (isset($_POST['url'])) {

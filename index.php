@@ -9,6 +9,7 @@ if (sizeof($_POST) === 0) {
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->get('/', '\\Page\\Home');
+    $r->get('/{id}', '\\API\\URL');
     $r->post('/api/url', '\\API\\URL');
 });
 
