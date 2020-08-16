@@ -8,7 +8,7 @@
       <div class="row align-items-center py-5" style="min-height: 75%">
         <div class="col-md mb-3 mb-md-0" style="text-shadow: var(--dark) 1px 1px 2px;">
           <h1 class="font-weight-bold mb-3">
-            <i class="fad fa-keyboard"></i>
+            <i class="fad fa-link"></i>
             Shorten your URLs, easily.
           </h1>
           <p class="lead mb-4">
@@ -17,6 +17,7 @@
           </p>
           <button class="btn btn-light shadow rounded-pill">
             Learn more
+            <i class="fad fa-arrow-right"></i>
           </button>
         </div>
         <div class="col-md">
@@ -26,7 +27,7 @@
                 <form class="mb-0" @submit.prevent="onSubmit">
                   <div class="form-group">
                     <label class="font-weight-bold">
-                      <i class="fad fa-link"></i>
+                      <i class="fad fa-keyboard"></i>
                       Your long URL:  
                     </label>
                     <div class="input-group">
@@ -70,12 +71,47 @@
     </div>
   </div>
   <div class="container">
-    <h2 class="font-weight-bold">
-      How does it works?
+    <h2 class="font-weight-bold mb-5">
+      How does it work?
       <small class="text-muted">
         Well, it's simple.
       </small>
     </h2>
+    <div class="row justify-content-around text-center">
+      <div class="col-md-3">
+        <div class="font-weight-bold">
+          <div class="display-4 text-primary">
+            <i class="fad fa-database"></i>
+          </div>
+          <h3>1. Persist</h3>
+        </div>
+        <p class="lead">
+          The link you provide is stored in our database and a unique, short identifier is generated.
+        </p>
+      </div>
+      <div class="col-md-3">
+        <div class="font-weight-bold">
+          <div class="display-4 text-primary">
+            <i class="fad fa-compress-alt"></i>
+          </div>
+          <h3>2. Optimize</h3>
+        </div>
+        <p class="lead">
+          The auto-generated identifier is converted to base 36.
+        </p>
+      </div>
+      <div class="col-md-3">
+        <div class="font-weight-bold">
+          <div class="display-4 text-primary">
+            <i class="fad fa-directions"></i>
+          </div>
+          <h3>3. Redirect</h3>
+        </div>
+        <p class="lead">
+          When you follow the shortened URL, a light redirection is applied with no log.
+        </p>
+      </div>
+    </div>
   </div>
 {% endblock %}
 
