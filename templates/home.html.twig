@@ -52,7 +52,7 @@
                   <div class="text-muted">
                     <template v-if="shortURL">
                       <a :href="shortURL" target="_blank">
-                        {{ shortURL }}
+                        https://lshot.me{{ shortURL }}
                       </a>
                     </template>
                     <template v-else>
@@ -147,7 +147,7 @@
               },
               body: JSON.stringify({ url: this.longURL })
             }).then(response => response.json()).then(data => {
-              this.shortURL = `https://l.pi-qo.com/${data.url}`
+              this.shortURL = `/${data.url}`
             }).catch(() => {
               this.showError = true
             })
