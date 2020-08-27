@@ -22,7 +22,9 @@ class URL
     public function POST($em)
     {
         if (isset($_POST['url'])) {
+            $url = $_POST['url'];
             $url = strpos($url, 'http') !== 0 ? "http://$url" : $url;
+            
             if (filter_var(
                 $url,
                 \FILTER_VALIDATE_URL
