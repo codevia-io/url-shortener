@@ -22,19 +22,20 @@ class URL
     public function POST($em)
     {
         if (isset($_POST['url'])) {
+            $url = strpos($url, 'http') !== 0 ? "http://$url" : $url;
             if (filter_var(
-                $_POST['url'],
+                $url,
                 \FILTER_VALIDATE_URL
             )) {
                 $qb = $em->createQueryBuilder();
                 $link = $em->getRepository('Entity\\Link')
-                    ->findOneBy(['destination' => $_POST['url']]);
+                    ->findOneBy(['destination' => $url]);
 
                 $id = 0;
 
                 if ($link === null) {
                     $link = new Link();
-                    $link->setDestination($_POST['url']);
+                    $link->setDestination($url);
                     $link->setDate(new \DateTime());
                     $em->persist($link);
                     $em->flush();
