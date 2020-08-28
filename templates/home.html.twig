@@ -4,68 +4,70 @@
 {% block body %}
   <div class="hero-container">
     <img class="hero-container-img" src="/assets/images/home-background.svg" alt="">
-    <div class="container text-white" style="min-height: calc(80vh - 3.5rem)">
-      <div class="row align-items-center py-5" style="min-height: 75%; position: absolute;">
-        <div class="col-md mb-3 mb-md-0" style="text-shadow: var(--dark) 1px 1px 2px;">
-          <h1 class="font-weight-bold mb-3">
-            <i class="fad fa-link"></i>
-            Shorten your URLs, easily.
-          </h1>
-          <p class="lead mb-4">
-            You want to beautify your emails with short URLs rather than long ugly ones?
-            Well, you've found the right place.
-          </p>
-          <a class="btn btn-light shadow rounded-pill" href="#how-does-it-work" style="text-shadow: none;">
-            Learn more
-            <i class="fad fa-arrow-right"></i>
-          </a>
-        </div>
-        <div class="col-md">
-          {% verbatim %}
-            <div id="app" class="card mb-2 bg-light text-dark shadow rounded-lg">
-              <div class="card-body p-2 p-md-3">
-                <form class="mb-0" @submit.prevent="onSubmit">
-                  <div class="form-group">
-                    <label class="font-weight-bold">
-                      <i class="fad fa-keyboard"></i>
-                      Your long URL:  
-                    </label>
-                    <div class="input-group">
-                      <input
-                        v-model="longURL"
-                        class="form-control"
-                        placeholder="Enter URL here"
-                        @input="showError = false"
-                      >
-                      <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">Reduce!</button>
+    <div class="text-white" style="min-height: calc(80vh - 3.5rem)">
+      <div class="container" style="min-height: 75%; position: absolute;">
+        <div class="row align-items-center py-5">
+          <div class="col-md mb-3 mb-md-0" style="text-shadow: var(--dark) 1px 1px 2px;">
+            <h1 class="font-weight-bold mb-3">
+              <i class="fad fa-link"></i>
+              Shorten your URLs, easily.
+            </h1>
+            <p class="lead mb-4">
+              You want to beautify your emails with short URLs rather than long ugly ones?
+              Well, you've found the right place.
+            </p>
+            <a class="btn btn-light shadow rounded-pill" href="#how-does-it-work" style="text-shadow: none;">
+              Learn more
+              <i class="fad fa-arrow-right"></i>
+            </a>
+          </div>
+          <div class="col-md">
+            {% verbatim %}
+              <div id="app" class="card mb-2 bg-light text-dark shadow rounded-lg">
+                <div class="card-body p-2 p-md-3">
+                  <form class="mb-0" @submit.prevent="onSubmit">
+                    <div class="form-group">
+                      <label class="font-weight-bold">
+                        <i class="fad fa-keyboard"></i>
+                        Your long URL:  
+                      </label>
+                      <div class="input-group">
+                        <input
+                          v-model="longURL"
+                          class="form-control"
+                          placeholder="Enter URL here"
+                          @input="showError = false"
+                        >
+                        <div class="input-group-append">
+                          <button class="btn btn-primary" type="submit">Reduce!</button>
+                        </div>
                       </div>
+                      <small v-if="showError" class="form-text text-danger" v-cloak>
+                        Please enter a valid URL.
+                      </small>
                     </div>
-                    <small v-if="showError" class="form-text text-danger" v-cloak>
-                      Please enter a valid URL.
-                    </small>
-                  </div>
-                  <label class="font-weight-bold">
-                    <i class="fad fa-star"></i>
-                    Shortened URL:
-                  </label>
-                  <div class="text-muted">
-                    <template v-if="shortURL">
-                      <a :href="shortURL" target="_blank">
-                        https://lshot.me{{ shortURL }}
-                      </a>
-                    </template>
-                    <template v-else>
-                      We are waiting for you to paste your long URL...
-                    </template>
-                  </div>
-                </form>
+                    <label class="font-weight-bold">
+                      <i class="fad fa-star"></i>
+                      Shortened URL:
+                    </label>
+                    <div class="text-muted">
+                      <template v-if="shortURL">
+                        <a :href="shortURL" target="_blank">
+                          https://lshot.me{{ shortURL }}
+                        </a>
+                      </template>
+                      <template v-else>
+                        We are waiting for you to paste your long URL...
+                      </template>
+                    </div>
+                  </form>
+                </div>
               </div>
-            </div>
-            <small class="text-muted" style="text-shadow: var(--light) 1px 1px 2px;">
-              We do not collect any data, except the URL you provide.
-            </small>
-          {% endverbatim %}
+              <small class="text-muted" style="text-shadow: var(--light) 1px 1px 2px;">
+                We do not collect any data, except the URL you provide.
+              </small>
+            {% endverbatim %}
+          </div>
         </div>
       </div>
     </div>
